@@ -1,6 +1,6 @@
 .catalog:
   name: leansw-go-agents
-  version: 0 
+  version: 16.2.1-rancher1
   description: 
   uuid: leansw-go-agents-0 
   minimum_rancher_version: v1.0.2
