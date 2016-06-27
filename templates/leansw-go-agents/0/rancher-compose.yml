@@ -1,9 +1,9 @@
 .catalog
-  name: LeanSW go Agents # Name of the versioned template of the Catalog Entry 
-  version: 0 # Version of the versioned template of the Catalog Entry 
-  description: # Description of the versioned template of the Catalog Entry
-  uuid: leansw-go-agents-0 # Unique identifier to be used for upgrades. Please see note. 
-  minimum_rancher_version: v1.0.2 # The minimum version of Rancher that supports the template
+  name: leansw-go-agents
+  version: 0 
+  description: 
+  uuid: leansw-go-agents-0 
+  minimum_rancher_version: v1.0.2
   questions: 
     - variable: "mem_initial"
       description: "Initial java memory in Mb"

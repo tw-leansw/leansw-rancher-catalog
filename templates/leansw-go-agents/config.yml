@@ -1,7 +1,8 @@
-name: LeanSW go Agents
-description: Go Agents for go leanSW 
-version: 0 
+name: leansw-go-agents
+description: "Go Agents for go leanSW"
+version: 16.2.1-rancher-1
 category: LeanSW
-maintainer: ylli@thoughtworks.com
-license: private
-projectURL: www.thoughtworks.com
+maintainer: "ylli@thoughtworks.com"
+license: 
+projectURL: "www.thoughtworks.com"
+minimum_rancher_version: v1.0.2
