@@ -1,0 +1,55 @@
+.catalog
+  name: LeanSW go Agents # Name of the versioned template of the Catalog Entry 
+  version: 0 # Version of the versioned template of the Catalog Entry 
+  description: # Description of the versioned template of the Catalog Entry
+  uuid: leansw-go-agents-0 # Unique identifier to be used for upgrades. Please see note. 
+  minimum_rancher_version: v1.0.2 # The minimum version of Rancher that supports the template
+  questions: 
+    - variable: "mem_initial"
+      description: "Initial java memory in Mb"
+      label: "Initial memory:"
+      required: true
+      default: 512
+      type: "int"
+    - variable: "mem_max"
+      description: "Max java memory in Mb"
+      label: "Max memory:"
+      required: true
+      default: 1024
+      type: "int"
+    - variable: "goserver_ip"
+      description: |
+        Choose the gocd service to connect. 
+      label: "Gocd server stack/service"
+      default: "gocd-sever/gocd-server"
+      required: true
+      type: "service"
+    - variable: "rancherserver_ip"
+      description: |
+        Choose the gocd service to connect. 
+      label: "Rancher server stack/service"
+      default: "rancher-sever/rancher-server"
+      required: true
+      type: "service"
+    - variable: "nexusserver_ip"
+      description: |
+        Choose the nexus service to connect. 
+      label: "Nexus server stack/service"
+      default: "nexus-sever/nexus-server"
+      required: true
+      type: "service"
+    - variable: "scale"
+      description: "Gocd agent instances"
+      label: "Instances:"
+      required: true
+      default: 1
+      type: "int"#Used to request user input for configuration options
+
+go-agent-node5-11-phantomjs2-1-1:
+  scale: ${scale}
+go-agent16-2-1-java8:
+  scale: ${scale}
+go-agent-node5-11-phantomjs2-1-1-data:
+  scale: 1
+go-agent16-2-1-java8-data:
+  scale: 1

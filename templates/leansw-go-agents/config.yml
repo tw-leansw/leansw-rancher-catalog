@@ -1,0 +1,7 @@
+name: LeanSW go Agents
+description: Go Agents for go leanSW 
+version: 0 
+category: LeanSW
+maintainer: ylli@thoughtworks.com
+license: private
+projectURL: www.thoughtworks.com
