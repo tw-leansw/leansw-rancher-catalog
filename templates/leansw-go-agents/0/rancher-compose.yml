@@ -1,9 +1,10 @@
 .catalog:
   name: leansw-go-agents
   version: 16.2.1-rancher1
-  description: 
+  description: |
+    Go Agents for go leanSW
   uuid: leansw-go-agents-0 
-  minimum_rancher_version: v1.0.2
+  minimum_rancher_version: v0.59.0
   questions: 
     - variable: "mem_initial"
       description: "Initial java memory in Mb"
