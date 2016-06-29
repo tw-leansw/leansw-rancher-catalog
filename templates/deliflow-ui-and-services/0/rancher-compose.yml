@@ -1,0 +1,10 @@
+deliflow-code-metrics-service:
+  scale: 1
+deliflow-identity-service:
+  scale: 1
+deliflow-discovery-service:
+  scale: 1
+deliflow-cd-metrics-service:
+  scale: 1
+deliflow-webapp:
+  scale: 1
