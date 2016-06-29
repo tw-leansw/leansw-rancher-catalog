@@ -81,6 +81,13 @@
       default: false
       required: true
       type: "boolean"
+    - variable: "host_env_label"
+      description: |
+        Host Env Label
+      default: "dev"
+      required: true
+      type: "string"
+
 
 deliflow-code-metrics-service:
   scale: 1
