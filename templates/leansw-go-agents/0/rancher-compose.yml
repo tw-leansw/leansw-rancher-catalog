@@ -6,12 +6,6 @@
   uuid: leansw-go-agents-0 
   minimum_rancher_version: v0.59.0
   questions: 
-    - variable: "mem_initial"
-      description: "Initial java memory in Mb"
-      label: "Initial memory:"
-      required: true
-      default: 512
-      type: "int"
     - variable: "mem_max"
       description: "Max java memory in Mb"
       label: "Max memory:"

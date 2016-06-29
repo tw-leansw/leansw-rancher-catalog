@@ -1,6 +1,6 @@
 go-agent-node5-11-phantomjs2-1-1:
   external_links:
-  - ${goserver_ip}:go-server
+  - ${goserver_ip}:gocd-server
   - ${rancherserver_ip}:rancher-server
   - ${nexusserver_ip}:nexus.server  
   labels:
@@ -16,7 +16,7 @@ go-agent-node5-11-phantomjs2-1-1:
   - AGENT_MAX_MEM=${mem_max}m
 go-agent16-2-1-java8:
   external_links:
-  - ${goserver_ip}:go-server
+  - ${goserver_ip}:gocd-server
   - ${rancherserver_ip}:rancher-server
   - ${nexusserver_ip}:nexus.server  
   log_driver: ''

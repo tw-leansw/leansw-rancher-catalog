@@ -5,6 +5,62 @@
     Deliflow UI(Web) And Services
   uuid: deliflow-ui-and-services-0 
   minimum_rancher_version: v0.59.0
+  questions: 
+    - variable: "mem_initial"
+      description: "Initial java memory in Mb"
+      label: "Initial memory:"
+      required: true
+      default: 256
+      type: "int"
+    - variable: "mem_max"
+      description: "Max java memory in Mb"
+      label: "Max memory:"
+      required: true
+      default: 512
+      type: "int"
+    - variable: "goserver_ip"
+      description: |
+        Choose the gocd service to connect. 
+      label: "Gocd server stack/service"
+      default: "gocd-sever/gocd-server"
+      required: true
+      type: "service"
+    - variable: "rancherserver_ip"
+      description: |
+        Choose the Rancher service to connect. 
+      label: "Rancher server stack/service"
+      default: "rancher-sever/rancher-server"
+      required: true
+      type: "service"
+    - variable: "sonarserver_ip"
+      description: |
+        Choose the SonarQube server to connect. 
+      label: "SonarQube server stack/service"
+      default: "sonar-sever/sonar-server"
+      required: true
+      type: "service" 
+    - variable: "artifactoryserver_ip"
+      description: |
+        Choose the artifactory service to connect. 
+      label: "Artifactory server stack/service"
+      default: "artifactory-sever/artifactory-server"
+      required: true
+      type: "service"      
+    - variable: "mongoserver_ip"
+      description: |
+        Choose the mongodb to connect. 
+      label: "MongoDB service stack/service"
+      default: "mongo-sever/mongo-server"
+      required: true
+      type: "service"
+    - variable: "mysqlserver_ip"
+      description: |
+        Choose the mysql to connect. 
+      label: "MySQL server stack/service"
+      default: "mysql-sever/mysql-server"
+      required: true
+      type: "service"
+
 deliflow-code-metrics-service:
   scale: 1
 deliflow-identity-service:

@@ -2,8 +2,8 @@ deliflow-code-metrics-service:
   ports:
   - 9003:9003/tcp
   external_links:
-  - 'external-services/mongo-server:'
-  - 'external-services/sonar-server:'
+  - ${sonarserver_ip}:sonar-server
+  - ${mongoserver_ip}:mongo-server
   labels:
     io.rancher.container.pull_image: always
   tty: true
@@ -27,10 +27,9 @@ deliflow-code-metrics-service:
 deliflow-identity-service:
   ports:
   - 2400:2400/tcp
-  - 4000:4000/tcp
   external_links:
-  - external-services/leansw-mysql:mysql-server
-  - 'external-services/gocd-server:'
+  - ${mysqlserver_ip}:mysql-server
+  - ${goserver_id}:gocd-server
   labels:
     io.rancher.container.pull_image: always
   tty: true
@@ -74,12 +73,12 @@ deliflow-cd-metrics-service:
     RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
     RANCHER_SECRET_KEY: E7xmHz2h22iJWUpf1atDEnqsd2zzv9udHdsQkjjy
   external_links:
-  - external-services/leansw-mysql:mysql-server
-  - external-services/gocd-server:go-server
-  - 'external-services/mongo-server:'
-  - 'external-services/rancher-server:'
-  - 'external-services/gocd-server:'
-  - 'external-services/artifactory-server:'
+  - ${goserver_ip}:gocd-server
+  - ${rancherserver_ip}:rancher-server
+  - ${sonarserver_ip}:sonar-server
+  - ${artifactoryserver_ip}:artifactory-server
+  - ${mysqlserver_ip}:mysql-server
+  - ${mongoserver_ip}:mongo-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
