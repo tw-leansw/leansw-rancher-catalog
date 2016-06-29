@@ -31,7 +31,7 @@ deliflow-identity-service:
   - 2400:2400/tcp
   external_links:
   - ${mysqlserver_ip}:mysql-server
-  - ${goserver_id}:gocd-server
+  - ${goserver_ip}:gocd-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
