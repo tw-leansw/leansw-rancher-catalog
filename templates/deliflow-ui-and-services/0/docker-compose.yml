@@ -83,9 +83,9 @@ deliflow-auth-service:
     --spring.profiles.active=$$PROFILE 
     --eureka.instance.preferIpAddress=false 
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/auth-services
+  image: registry.aliyuncs.com/leansw/auth-server
   links:
-  - deliflow-discovery-service:auth-server
+  - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-discovery-service:
   ports:
