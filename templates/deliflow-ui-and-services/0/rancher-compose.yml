@@ -84,12 +84,14 @@
     - variable: "docker_image_tag"
       description: |
         Docker Image Tag : latest/release etc.
+      label: Docker Image Tag
       default: "latest"
       required: true
       type: "string"
     - variable: "host_env_label"
       description: |
         Host Env Label(soft)
+      label: "Host Env Label"
       default: "dev"
       required: true
       type: "string"
