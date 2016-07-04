@@ -81,12 +81,19 @@
       default: false
       required: true
       type: "boolean"
+    - variable: "docker_image_tag"
+      description: |
+        Docker Image Tag : latest/release etc.
+      default: "latest"
+      required: true
+      type: "string"
     - variable: "host_env_label"
       description: |
-        Host Env Label
+        Host Env Label(soft)
       default: "dev"
       required: true
       type: "string"
+
 
 
 deliflow-code-metrics-service:

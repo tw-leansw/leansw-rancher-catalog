@@ -22,7 +22,7 @@ deliflow-code-metrics-service:
     --eureka.instance.preferIpAddress=false 
     --spring.profiles.active=$$PROFILE  
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/code-metrics
+  image: registry.aliyuncs.com/leansw/code-metrics:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
@@ -57,7 +57,7 @@ deliflow-identity-service:
     --eureka.instance.preferIpAddress=false 
     --quartz.enabled=${identity_quartz_enable} 
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/identity-services
+  image: registry.aliyuncs.com/leansw/identity-services:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
@@ -83,7 +83,7 @@ deliflow-auth-service:
     --spring.profiles.active=$$PROFILE 
     --eureka.instance.preferIpAddress=false 
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/auth-server
+  image: registry.aliyuncs.com/leansw/auth-server:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
@@ -95,7 +95,7 @@ deliflow-discovery-service:
     io.ranhcer.container.hostname_override: container_name
     io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
   tty: true
-  image: registry.aliyuncs.com/leansw/discovery-service
+  image: registry.aliyuncs.com/leansw/discovery-service:${docker_image_tag}
   stdin_open: true
 deliflow-cd-metrics-service:
   ports:
@@ -139,7 +139,7 @@ deliflow-cd-metrics-service:
     --eureka.instance.preferIpAddress=false 
     --quartz.enabled=${code_metrics_quartz_enable}  
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/cd-metrics
+  image: registry.aliyuncs.com/leansw/cd-metrics:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
@@ -162,7 +162,7 @@ deliflow-webapp:
     --eureka.instance.preferIpAddress=false 
     --spring.profiles.active=$$PROFILE  
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/deliflow-webapp
+  image: registry.aliyuncs.com/leansw/deliflow-webapp:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
