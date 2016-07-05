@@ -4,6 +4,7 @@ deliflow-code-metrics-service:
   external_links:
   - ${sonarserver_ip}:sonar-server
   - ${mongoserver_ip}:mongo-server
+  - $${stack_name}/deliflow-discovery-service:eureka-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
@@ -23,8 +24,6 @@ deliflow-code-metrics-service:
     --spring.profiles.active=$$PROFILE  
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/code-metrics:${docker_image_tag}
-  links:
-  - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-identity-service:
   ports:
@@ -32,6 +31,7 @@ deliflow-identity-service:
   external_links:
   - ${mysqlserver_ip}:mysql-server
   - ${goserver_ip}:gocd-server
+  - $${stack_name}/deliflow-discovery-service:eureka-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
@@ -58,8 +58,6 @@ deliflow-identity-service:
     --quartz.enabled=${identity_quartz_enable} 
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/identity-services:${docker_image_tag}
-  links:
-  - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-auth-service:
   ports:
@@ -67,6 +65,7 @@ deliflow-auth-service:
   external_links:
   - ${mysqlserver_ip}:mysql-server
   - ${goserver_ip}:gocd-server
+  - $${stack_name}/deliflow-discovery-service:eureka-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
@@ -84,8 +83,6 @@ deliflow-auth-service:
     --eureka.instance.preferIpAddress=false 
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/auth-server:${docker_image_tag}
-  links:
-  - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-discovery-service:
   ports:
@@ -111,6 +108,7 @@ deliflow-cd-metrics-service:
   - ${artifactoryserver_ip}:artifactory-server
   - ${mysqlserver_ip}:mysql-server
   - ${mongoserver_ip}:mongo-server
+  - $${stack_name}/deliflow-discovery-service:eureka-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
@@ -140,8 +138,6 @@ deliflow-cd-metrics-service:
     --quartz.enabled=${code_metrics_quartz_enable}  
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/cd-metrics:${docker_image_tag}
-  links:
-  - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-webapp:
   ports:
@@ -151,6 +147,8 @@ deliflow-webapp:
     io.ranhcer.container.hostname_override: container_name
     io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
   tty: true
+  external_links:
+    - $${stack_name}/deliflow-discovery-service:eureka-server
   entrypoint:
   - bash
   - -c
@@ -163,6 +161,4 @@ deliflow-webapp:
     --spring.profiles.active=$$PROFILE  
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/deliflow-webapp:${docker_image_tag}
-  links:
-  - deliflow-discovery-service:eureka-server
   stdin_open: true
