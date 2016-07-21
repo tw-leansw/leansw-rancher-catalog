@@ -53,7 +53,7 @@ deliflow-identity-service:
     ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} && 
     USERNAME=$${GOCD_USERNAME:=admin} && 
     PASSWORD=$${GOCD_PASSWORD:=badger} && 
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -jar /identity-services.jar 
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom  -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/identity-services.jar com.thoughtworks.lean.identity.IdentityServer 
     --spring.profiles.active=$$PROFILE 
     --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH 
     --gocd.server.username=$$USERNAME 
