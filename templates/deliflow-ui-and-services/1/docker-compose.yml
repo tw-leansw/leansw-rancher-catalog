@@ -19,14 +19,14 @@ deliflow-code-metrics-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) && 
-    echo $$EUREKA_INSTANCE_HOSTNAME && 
-    PROFILE=$${ACTIVE_PROFILE:=docker} && 
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -jar /code-metrics.jar 
-    --logging.level.sun.net.www.http=DEBUG 
-    --quartz.enabled=${code_metrics_quartz_enable} 
-    --eureka.instance.preferIpAddress=false 
-    --spring.profiles.active=$$PROFILE  
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
+    echo $$EUREKA_INSTANCE_HOSTNAME &&
+    PROFILE=$${ACTIVE_PROFILE:=docker} &&
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService
+    --logging.level.sun.net.www.http=DEBUG
+    --quartz.enabled=${code_metrics_quartz_enable}
+    --eureka.instance.preferIpAddress=false
+    --spring.profiles.active=$$PROFILE
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/code-metrics:${docker_image_tag}
   links:
@@ -45,21 +45,21 @@ deliflow-identity-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip)&& 
-    echo $$EUREKA_INSTANCE_HOSTNAME  && 
-    PROFILE=$${ACTIVE_PROFILE:=docker} && 
-    HOST=$${GOCD_SERVER_HOST:=gocd-server} && 
-    PORT=$${GOCD_SERVER_PORT:=8153} && 
-    ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} && 
-    USERNAME=$${GOCD_USERNAME:=admin} && 
-    PASSWORD=$${GOCD_PASSWORD:=badger} && 
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom  -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/identity-services.jar com.thoughtworks.lean.identity.IdentityServer 
-    --spring.profiles.active=$$PROFILE 
-    --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH 
-    --gocd.server.username=$$USERNAME 
-    --gocd.server.password=$$PASSWORD  
-    --eureka.instance.preferIpAddress=false 
-    --quartz.enabled=${identity_quartz_enable} 
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip)&&
+    echo $$EUREKA_INSTANCE_HOSTNAME  &&
+    PROFILE=$${ACTIVE_PROFILE:=docker} &&
+    HOST=$${GOCD_SERVER_HOST:=gocd-server} &&
+    PORT=$${GOCD_SERVER_PORT:=8153} &&
+    ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} &&
+    USERNAME=$${GOCD_USERNAME:=admin} &&
+    PASSWORD=$${GOCD_PASSWORD:=badger} &&
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom  -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/identity-services.jar com.thoughtworks.lean.identity.IdentityServer
+    --spring.profiles.active=$$PROFILE
+    --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH
+    --gocd.server.username=$$USERNAME
+    --gocd.server.password=$$PASSWORD
+    --eureka.instance.preferIpAddress=false
+    --quartz.enabled=${identity_quartz_enable}
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/identity-services:${docker_image_tag}
   links:
@@ -80,12 +80,12 @@ deliflow-auth-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip)&& 
-    echo $$EUREKA_INSTANCE_HOSTNAME  && 
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip)&&
+    echo $$EUREKA_INSTANCE_HOSTNAME  &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -jar /auth-server.jar 
-    --spring.profiles.active=$$PROFILE 
-    --eureka.instance.preferIpAddress=false 
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/auth-server.jar org.thoughtworks.lean.identity.AuthServer
+    --spring.profiles.active=$$PROFILE
+    --eureka.instance.preferIpAddress=false
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/auth-server:${docker_image_tag}
   links:
@@ -119,25 +119,25 @@ deliflow-cd-metrics-service:
   entrypoint:
   - bash
   - -c
-  - > 
+  - >
     export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
-    echo $$EUREKA_INSTANCE_HOSTNAME && 
-    PROFILE=$${ACTIVE_PROFILE:=docker} && 
-    HOST=$${GOCD_SERVER_HOST:=gocd-server} && 
-    PORT=$${GOCD_SERVER_PORT:=8153} && 
-    ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} && 
-    USERNAME=$${GOCD_USERNAME:=admin} && 
-    PASSWORD=$${GOCD_PASSWORD:=badger} && 
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -jar cd-metrics.jar  
-    --rancher.uri=$$RANCHER_URI  
-    --rancher.secretKey=$$RANCHER_SECRET_KEY  
-    --rancher.accessSecret=$$RANCHER_ACCESS_SECRET  
-    --spring.profiles.active=$$PROFILE  
-    --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH  
-    --gocd.server.username=$$USERNAME  
-    --gocd.server.password=$$PASSWORD  
-    --eureka.instance.preferIpAddress=false 
-    --quartz.enabled=${code_metrics_quartz_enable}  
+    echo $$EUREKA_INSTANCE_HOSTNAME &&
+    PROFILE=$${ACTIVE_PROFILE:=docker} &&
+    HOST=$${GOCD_SERVER_HOST:=gocd-server} &&
+    PORT=$${GOCD_SERVER_PORT:=8153} &&
+    ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} &&
+    USERNAME=$${GOCD_USERNAME:=admin} &&
+    PASSWORD=$${GOCD_PASSWORD:=badger} &&
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/cd-metrics.jar com.thoughtworks.lean.MetricsServer
+    --rancher.uri=$$RANCHER_URI
+    --rancher.secretKey=$$RANCHER_SECRET_KEY
+    --rancher.accessSecret=$$RANCHER_ACCESS_SECRET
+    --spring.profiles.active=$$PROFILE
+    --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH
+    --gocd.server.username=$$USERNAME
+    --gocd.server.password=$$PASSWORD
+    --eureka.instance.preferIpAddress=false
+    --quartz.enabled=${code_metrics_quartz_enable}
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/cd-metrics:${docker_image_tag}
   links:
@@ -153,12 +153,12 @@ deliflow-webapp:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) && 
-    echo $$EUREKA_INSTANCE_HOSTNAME && 
-    PROFILE=$${ACTIVE_PROFILE:=docker} && 
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -jar /deliflow-webapp.jar  
-    --eureka.instance.preferIpAddress=false 
-    --spring.profiles.active=$$PROFILE  
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
+    echo $$EUREKA_INSTANCE_HOSTNAME &&
+    PROFILE=$${ACTIVE_PROFILE:=docker} &&
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -jar -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow
+    --eureka.instance.preferIpAddress=false
+    --spring.profiles.active=$$PROFILE
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/deliflow-webapp:${docker_image_tag}
   links:
