@@ -117,5 +117,7 @@ deliflow-discovery-service:
   scale: 1
 deliflow-cd-metrics-service:
   scale: 1
+ deliflow-quartz-service:
+  scale: 1 
 deliflow-webapp:
   scale: 1
