@@ -144,6 +144,8 @@ deliflow-cd-metrics-service:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-quartz-service:
+  ports:
+  - 9005:9005/tcp
   environment:
     RANCHER_URI: http://rancher-server:8080
     RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
