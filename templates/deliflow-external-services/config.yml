@@ -1,0 +1,9 @@
+name: deliflow-external-services
+description: |
+  Deliflow External Services
+version: 1.0.0-rancher1
+category: Continuous Integration
+maintainer: "ylli@thoughtworks.com"
+license:
+projectURL: "www.thoughtworks.com"
+minimum_rancher_version: v0.59.0
