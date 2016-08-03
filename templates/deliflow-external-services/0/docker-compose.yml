@@ -11,7 +11,7 @@ deliflow-gocd-server:
   stdin_open: true
 deliflow-mongo-sever:
   ports:
-  - 21017:21017/tcp
+  - 27017:27017/tcp
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
