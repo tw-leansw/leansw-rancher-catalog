@@ -1,8 +1,8 @@
 .catalog:
-  name: deliflow-ui-and-services
+  name: deliflow-quick-start
   version: 1.0.0-rancher2
   description: |
-    Deliflow UI(Web) And Services
+    Deliflow Quick Start
   uuid: deliflow-ui-and-services-0
   minimum_rancher_version: v0.59.0
   questions:

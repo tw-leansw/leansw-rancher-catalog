@@ -1,6 +1,6 @@
-name: deliflow-ui-and-services
+name: deliflow-quick-start
 description: |
-  Deliflow UI(Web) And Services
+  Deliflow Quick Start
 version: 1.0.0-rancher1
 category: Continuous Integration
 maintainer: "ylli@thoughtworks.com"
