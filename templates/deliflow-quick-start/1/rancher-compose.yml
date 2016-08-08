@@ -1,0 +1,123 @@
+.catalog:
+  name: deliflow-ui-and-services
+  version: 1.0.0-rancher2
+  description: |
+    Deliflow UI(Web) And Services
+  uuid: deliflow-ui-and-services-0
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "mem_initial"
+      description: "Initial java memory in Mb"
+      label: "Initial memory:"
+      required: true
+      default: 256
+      type: "int"
+    - variable: "mem_max"
+      description: "Max java memory in Mb"
+      label: "Max memory:"
+      required: true
+      default: 512
+      type: "int"
+    - variable: "goserver_ip"
+      description: |
+        Choose the gocd service to connect.
+      label: "Gocd server stack/service"
+      default: "gocd-sever/gocd-server"
+      required: true
+      type: "service"
+    - variable: "rancherserver_ip"
+      description: |
+        Choose the Rancher service to connect.
+      label: "Rancher server stack/service"
+      default: "rancher-sever/rancher-server"
+      required: true
+      type: "service"
+    - variable: "sonarserver_ip"
+      description: |
+        Choose the SonarQube server to connect.
+      label: "SonarQube server stack/service"
+      default: "sonar-sever/sonar-server"
+      required: true
+      type: "service"
+    - variable: "artifactoryserver_ip"
+      description: |
+        Choose the artifactory service to connect.
+      label: "Artifactory server stack/service"
+      default: "artifactory-sever/artifactory-server"
+      required: true
+      type: "service"
+    - variable: "mongoserver_ip"
+      description: |
+        Choose the mongodb to connect.
+      label: "MongoDB service stack/service"
+      default: "mongo-sever/mongo-server"
+      required: true
+      type: "service"
+    - variable: "mysqlserver_ip"
+      description: |
+        Choose the mysql to connect.
+      label: "MySQL server stack/service"
+      default: "mysql-sever/mysql-server"
+      required: true
+      type: "service"
+    - variable: "code_metrics_quartz_enable"
+      description: |
+        Code Metrisc Quartz Enable ?
+      label: "Identity Quartz Enable ?"
+      default: false
+      required: true
+      type: "boolean"
+    - variable: "identity_quartz_enable"
+      description: |
+        Identity Quartz Enable ?
+      label: "Identity Quartz Enable?"
+      default: false
+      required: true
+      type: "boolean"
+    - variable: "cd_metrics_quartz_enable"
+      description: |
+        Cd Metrics Quartz Enable ?
+      label: "Cd Metrics Quartz Enable?"
+      default: false
+      required: true
+      type: "boolean"
+    - variable: "docker_image_tag"
+      description: |
+        Docker Image Tag : latest/release etc.
+      label: Docker Image Tag
+      default: "latest"
+      required: true
+      type: "string"
+    - variable: "host_env_label"
+      description: |
+        Host Env Label(soft)
+      label: "Host Env Label"
+      default: "dev"
+      required: true
+      type: "string"
+
+deliflow-webapp-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+deliflow-code-metrics-service:
+  scale: 1
+deliflow-identity-service:
+  scale: 1
+deliflow-auth-service:
+  scale: 1
+deliflow-discovery-service:
+  scale: 1
+deliflow-cd-metrics-service:
+  scale: 1
+deliflow-quartz-service:
+  scale: 1 
+deliflow-webapp:
+  scale: 1
