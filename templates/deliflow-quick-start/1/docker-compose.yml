@@ -5,7 +5,7 @@ deliflow-code-metrics-service:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   entrypoint:
   - bash
@@ -31,7 +31,7 @@ deliflow-identity-service:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   entrypoint:
   - bash
@@ -66,7 +66,7 @@ deliflow-auth-service:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   entrypoint:
   - bash
@@ -87,7 +87,7 @@ deliflow-discovery-service:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   image: registry.aliyuncs.com/leansw/discovery-service:${docker_image_tag}
   stdin_open: true
@@ -106,7 +106,7 @@ deliflow-cd-metrics-service:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   entrypoint:
   - bash
@@ -152,7 +152,7 @@ deliflow-quartz-service:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   entrypoint:
   - bash
@@ -187,7 +187,7 @@ deliflow-webapp:
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+    
   tty: true
   entrypoint:
   - bash
