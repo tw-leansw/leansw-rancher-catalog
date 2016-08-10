@@ -146,10 +146,6 @@ deliflow-cd-metrics-service:
 deliflow-quartz-service:
   ports:
   - 9005:9005/tcp
-  environment:
-    RANCHER_URI: http://rancher-server:8080
-    RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
-    RANCHER_SECRET_KEY: E7xmHz2h22iJWUpf1atDEnqsd2zzv9udHdsQkjjy
   external_links:
   - ${goserver_ip}:gocd-server
   - ${rancherserver_ip}:rancher-server
@@ -175,9 +171,6 @@ deliflow-quartz-service:
     USERNAME=$${GOCD_USERNAME:=admin} &&
     PASSWORD=$${GOCD_PASSWORD:=badger} &&
     java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/quartz-service.jar com.thoughtworks.lean.quartz.QuartzService
-    --rancher.uri=$$RANCHER_URI
-    --rancher.secretKey=$$RANCHER_SECRET_KEY
-    --rancher.accessSecret=$$RANCHER_ACCESS_SECRET
     --spring.profiles.active=$$PROFILE
     --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH
     --gocd.server.username=$$USERNAME
