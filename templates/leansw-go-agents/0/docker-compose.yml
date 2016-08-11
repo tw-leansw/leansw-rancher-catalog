@@ -29,6 +29,9 @@ go-agent16-2-1-java8:
     io.rancher.sidekicks: go-agent16-2-1-java8-data
     io.rancher.container.pull_image: always
   tty: true
+  dns:
+  - 223.5.5.5
+  - 223.6.6.6
   log_opt: {}
   image: registry.aliyuncs.com/leansw/go_agent16_2_1_java8
   volumes_from:

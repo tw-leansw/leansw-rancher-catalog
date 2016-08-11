@@ -7,6 +7,8 @@ deliflow-webapp-lb:
   - deliflow-webapp:deliflow-webapp
   stdin_open: true
 deliflow-code-metrics-service:
+  ports:
+  - 9003:9003/tcp
   external_links:
   - ${sonarserver_ip}:sonar-server
   - ${mongoserver_ip}:mongo-server
@@ -33,6 +35,8 @@ deliflow-code-metrics-service:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-identity-service:
+  ports:
+  - 2400:2400/tcp
   external_links:
   - ${mysqlserver_ip}:mysql-server
   - ${goserver_ip}:gocd-server
@@ -100,6 +104,8 @@ deliflow-discovery-service:
   image: registry.aliyuncs.com/leansw/discovery-service:${docker_image_tag}
   stdin_open: true
 deliflow-cd-metrics-service:
+  ports:
+  - 9001:9001/tcp
   environment:
     RANCHER_URI: http://rancher-server:8080
     RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
