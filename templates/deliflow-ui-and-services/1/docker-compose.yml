@@ -189,6 +189,8 @@ deliflow-quartz-service:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-webapp:
+  ports:
+  - 9900:9900/tcp
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
