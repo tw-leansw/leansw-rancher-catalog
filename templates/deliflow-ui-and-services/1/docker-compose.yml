@@ -19,7 +19,7 @@ deliflow-code-metrics-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&
     echo $$EUREKA_INSTANCE_HOSTNAME &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService
@@ -45,7 +45,7 @@ deliflow-identity-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip)&&
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip)&&
     echo $$EUREKA_INSTANCE_HOSTNAME  &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     HOST=$${GOCD_SERVER_HOST:=gocd-server} &&
@@ -80,7 +80,7 @@ deliflow-auth-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip)&&
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip)&&
     echo $$EUREKA_INSTANCE_HOSTNAME  &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/auth-server.jar org.thoughtworks.lean.identity.AuthServer
@@ -120,7 +120,7 @@ deliflow-cd-metrics-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&
     echo $$EUREKA_INSTANCE_HOSTNAME &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     HOST=$${GOCD_SERVER_HOST:=gocd-server} &&
@@ -162,7 +162,7 @@ deliflow-quartz-service:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&
     echo $$EUREKA_INSTANCE_HOSTNAME &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     HOST=$${GOCD_SERVER_HOST:=gocd-server} &&
@@ -192,7 +192,7 @@ deliflow-webapp:
   - bash
   - -c
   - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata/latest/self/container/primary_ip) &&
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&
     echo $$EUREKA_INSTANCE_HOSTNAME &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow
