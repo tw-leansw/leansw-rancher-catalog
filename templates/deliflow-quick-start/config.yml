@@ -1,6 +1,8 @@
 name: deliflow-quick-start
 description: |
-  Deliflow Quick Start
+    Deliflow Quick Start
+    All Deliflow Services + UI
+    SonarQube  Artifactory  GoCD-server GoCD-agent MongoDB MySQL rabbitmq
 version: 1.0.0-rancher1
 category: Continuous Integration
 maintainer: "ylli@thoughtworks.com"
