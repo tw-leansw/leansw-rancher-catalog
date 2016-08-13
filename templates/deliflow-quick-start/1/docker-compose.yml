@@ -16,6 +16,8 @@ deliflow-webapp:
   - deliflow-rabbitmq:rabbitmq-server
   stdin_open: true
 deliflow-code-metrics-service:
+  ports:
+  - 9003:9003/tcp
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
@@ -31,6 +33,8 @@ deliflow-code-metrics-service:
   - deliflow-mongo:mongo-server
   stdin_open: true
 deliflow-cd-metrics-service:
+  ports:
+  - 9001:9001/tcp
   environment:
     RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
     RANCHER_SECRET_KEY: E7xmHz2h22iJWUpf1atDEnqsd2zzv9udHdsQkjjy
