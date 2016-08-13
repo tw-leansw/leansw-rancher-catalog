@@ -60,6 +60,13 @@
       default: "mysql-sever/mysql-server"
       required: true
       type: "service"
+    - variable: "rabbitmq_ip"
+      description: |
+        Choose the rabbitmq to connect.
+      label: "Rabbitmq server stack/service"
+      default: "rabibitmq-sever/rabbitmq-server"
+      required: true
+      type: "service"
     - variable: "code_metrics_quartz_enable"
       description: |
         Code Metrisc Quartz Enable ?
