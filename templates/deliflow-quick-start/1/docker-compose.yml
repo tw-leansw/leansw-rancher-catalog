@@ -195,6 +195,6 @@ deliflow-rabbitmq:
   labels:
     io.rancher.container.pull_image: always
   tty: true
-  images: registry.aliyuncs.com/leansw/rabbitmq:3
+  image: registry.aliyuncs.com/leansw/rabbitmq:3
   stdin_open: true
 
