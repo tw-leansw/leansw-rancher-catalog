@@ -168,6 +168,7 @@ deliflow-quartz-service:
 deliflow-gocd-server:
   ports:
   - 8153:8153/tcp
+  - 8154:8154/tcp
   labels:
     io.rancher.container.pull_image: always
   tty: true
