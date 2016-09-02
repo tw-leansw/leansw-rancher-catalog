@@ -18,6 +18,13 @@
       required: true
       default: 512
       type: "int"
+    - variable: "app_service_home"
+      description: |
+        The Web app's root url example: https://www.exmaple.org/
+      label: Web App Home url
+      default: "https://dev.ui.twleansw.com"
+      required: true
+      type: "string"
     - variable: "goserver_ip"
       description: |
         Choose the gocd service to connect.

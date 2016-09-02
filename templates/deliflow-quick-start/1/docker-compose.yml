@@ -9,7 +9,14 @@ deliflow-webapp:
   - bash
   - -c
   - |
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && echo $$EUREKA_INSTANCE_HOSTNAME && PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && 
+    echo $$EUREKA_INSTANCE_HOSTNAME && 
+    PROFILE=$${ACTIVE_PROFILE:=docker} && 
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow 
+    --eureka.instance.preferIpAddress=false 
+    --spring.profiles.active=$$PROFILE 
+    --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    --app.service.home=${app_service_home}
   image: registry.aliyuncs.com/leansw/deliflow-webapp:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server

@@ -30,6 +30,7 @@ deliflow-code-metrics-service:
     --eureka.instance.preferIpAddress=false
     --spring.profiles.active=$$PROFILE
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    --app.service.home=${app_service_home}
   image: registry.aliyuncs.com/leansw/code-metrics:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
