@@ -1,0 +1,5 @@
+name: MongoDB(LeanSW)
+description: |
+  MongoDB(LeanSW) Replica Set.
+version: 3.2-rancher1
+category: Databases
