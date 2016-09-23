@@ -60,7 +60,7 @@
       default: "mongo-sever/mongo-server"
       required: true
       type: "service"
-    - variable: "rabbitmq_ip"
+    - variable: "rabbitmqserver_ip"
       description: |
         Choose the rabbitmq to connect.
       label: "Rabbitmq server stack/service"
