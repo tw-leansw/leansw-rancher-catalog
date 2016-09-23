@@ -18,7 +18,6 @@ deliflow-code-metrics-service:
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService
     --logging.level.sun.net.www.http=DEBUG
-    --quartz.enabled=${code_metrics_quartz_enable}
     --eureka.instance.preferIpAddress=false
     --spring.profiles.active=$$PROFILE
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
@@ -55,7 +54,6 @@ deliflow-identity-service:
     --gocd.server.username=$$USERNAME
     --gocd.server.password=$$PASSWORD
     --eureka.instance.preferIpAddress=false
-    --quartz.enabled=${identity_quartz_enable}
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/identity-services:${docker_image_tag}
   links:
@@ -109,7 +107,6 @@ deliflow-cd-metrics-service:
     --gocd.server.username=$$USERNAME
     --gocd.server.password=$$PASSWORD
     --eureka.instance.preferIpAddress=false
-    --quartz.enabled=${code_metrics_quartz_enable}
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/cd-metrics:${docker_image_tag}
   links:
@@ -147,7 +144,6 @@ deliflow-quartz-service:
     --gocd.server.username=$$USERNAME
     --gocd.server.password=$$PASSWORD
     --eureka.instance.preferIpAddress=false
-    --quartz.enabled=${code_metrics_quartz_enable}
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
   image: registry.aliyuncs.com/leansw/quartz-service:${docker_image_tag}
   links:
