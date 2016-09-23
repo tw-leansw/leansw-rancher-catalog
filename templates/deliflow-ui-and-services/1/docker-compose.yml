@@ -171,5 +171,6 @@ deliflow-webapp:
   image: registry.aliyuncs.com/leansw/deliflow-webapp:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
+  external_links:
   - ${rabbitmqserver_ip}:rabbitmq-server
   stdin_open: true
