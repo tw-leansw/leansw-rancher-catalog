@@ -1,11 +1,3 @@
-deliflow-webapp-lb:
-  ports:
-  - 80:9900
-  tty: true
-  image: rancher/load-balancer-service
-  links:
-  - deliflow-webapp:deliflow-webapp
-  stdin_open: true
 deliflow-code-metrics-service:
   ports:
   - 9003:9003/tcp
@@ -39,7 +31,6 @@ deliflow-identity-service:
   ports:
   - 2400:2400/tcp
   external_links:
-  - ${mysqlserver_ip}:mysql-server
   - ${goserver_ip}:gocd-server
   labels:
     io.rancher.container.pull_image: always
@@ -70,32 +61,6 @@ deliflow-identity-service:
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
-deliflow-auth-service:
-  ports:
-  - 8081:8080/tcp
-  external_links:
-  - ${mysqlserver_ip}:mysql-server
-  - ${goserver_ip}:gocd-server
-  labels:
-    io.rancher.container.pull_image: always
-    io.ranhcer.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
-  tty: true
-  entrypoint:
-  - bash
-  - -c
-  - >
-    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip)&&
-    echo $$EUREKA_INSTANCE_HOSTNAME  &&
-    PROFILE=$${ACTIVE_PROFILE:=docker} &&
-    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/auth-server.jar org.thoughtworks.lean.identity.AuthServer
-    --spring.profiles.active=$$PROFILE
-    --eureka.instance.preferIpAddress=false
-    --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: registry.aliyuncs.com/leansw/auth-server:${docker_image_tag}
-  links:
-  - deliflow-discovery-service:eureka-server
-  stdin_open: true
 deliflow-discovery-service:
   labels:
     io.rancher.container.pull_image: always
@@ -116,7 +81,6 @@ deliflow-cd-metrics-service:
   - ${rancherserver_ip}:rancher-server
   - ${sonarserver_ip}:sonar-server
   - ${artifactoryserver_ip}:artifactory-server
-  - ${mysqlserver_ip}:mysql-server
   - ${mongoserver_ip}:mongo-server
   - ${rabbitmqserver_ip}:rabbitmq-server
   labels:
@@ -159,7 +123,6 @@ deliflow-quartz-service:
   - ${rancherserver_ip}:rancher-server
   - ${sonarserver_ip}:sonar-server
   - ${artifactoryserver_ip}:artifactory-server
-  - ${mysqlserver_ip}:mysql-server
   - ${mongoserver_ip}:mongo-server
   labels:
     io.rancher.container.pull_image: always

@@ -60,13 +60,6 @@
       default: "mongo-sever/mongo-server"
       required: true
       type: "service"
-    - variable: "mysqlserver_ip"
-      description: |
-        Choose the mysql to connect.
-      label: "MySQL server stack/service"
-      default: "mysql-sever/mysql-server"
-      required: true
-      type: "service"
     - variable: "rabbitmq_ip"
       description: |
         Choose the rabbitmq to connect.
@@ -109,23 +102,9 @@
       default: "dev"
       required: true
       type: "string"
-
-deliflow-webapp-lb:
-  scale: 1
-  load_balancer_config:
-    haproxy_config: {}
-  health_check:
-    port: 42
-    interval: 2000
-    unhealthy_threshold: 3
-    healthy_threshold: 2
-    response_timeout: 2000
-
 deliflow-code-metrics-service:
   scale: 1
 deliflow-identity-service:
-  scale: 1
-deliflow-auth-service:
   scale: 1
 deliflow-discovery-service:
   scale: 1
@@ -133,5 +112,5 @@ deliflow-cd-metrics-service:
   scale: 1
 deliflow-quartz-service:
   scale: 1 
-deliflow-webapp:
-  scale: 1
+
+
