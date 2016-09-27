@@ -176,7 +176,7 @@ deliflow-webapp:
   stdin_open: true
 deliflow-graph-service:
   ports: 
-  - 9005:9005/tcp
+  - 9004:9004/tcp
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
