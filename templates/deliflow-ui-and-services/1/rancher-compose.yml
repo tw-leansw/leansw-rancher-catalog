@@ -53,7 +53,14 @@
       default: "artifactory-sever/artifactory-server"
       required: true
       type: "service"
-    - variable: "mongoserver_ip"
+    - variable: "mongoserver1_ip"
+      description: |
+        Choose the mongodb to connect.
+      label: "MongoDB service stack/service"
+      default: "mongo-sever/mongo-server"
+      required: true
+      type: "service"
+    - variable: "mongoserver2_ip"
       description: |
         Choose the mongodb to connect.
       label: "MongoDB service stack/service"
@@ -91,5 +98,6 @@ deliflow-cd-metrics-service:
   scale: 1
 deliflow-quartz-service:
   scale: 1 
-
+deliflow-graph-service:
+  scale: 1
 

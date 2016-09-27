@@ -174,3 +174,26 @@ deliflow-webapp:
   external_links:
   - ${rabbitmqserver_ip}:rabbitmq-server
   stdin_open: true
+deliflow-graph-service:
+  ports: 
+  - 9005:9005/tcp
+  labels:
+    io.rancher.container.pull_image: always
+    io.ranhcer.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+  tty: true
+  entrypoint:
+  - bash
+  - -c
+  - >
+    export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&
+    echo $$EUREKA_INSTANCE_HOSTNAME &&
+    PROFILE=$${ACTIVE_PROFILE:=docker} &&
+    java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/graph-service.jar com.thoughtworks.lean.graph.GraphService
+    --eureka.instance.preferIpAddress=false
+    --spring.profiles.active=$$PROFILE
+    --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+  image: registry.aliyuncs.com/leansw/deliflow-graph-service:${docker_image_tag}
+  links:
+  - deliflow-discovery-service:eureka-server
+  stdin_open: true
