@@ -1,0 +1,12 @@
+.catalog:
+  name: mongo-connector
+  version: 2.4-rancher1
+  description: |
+    Go Agents for go leanSW
+  uuid: leansw-mongo-connector-0 
+  minimum_rancher_version: v0.59.0
+  questions: 
+mongo-connector:
+  scale: 1
+mongo-connector-conf:
+  scale: 1
