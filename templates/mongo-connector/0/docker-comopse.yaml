@@ -1,0 +1,16 @@
+mongo-connector:
+  external_links:
+  - ${mongo-server1}:mongo-server1
+  - ${mongo-server1}:mongo-server2
+  labels:
+    io.rancher.sidekicks: mongo-connector-conf
+    io.rancher.container.pull_image: always
+  tty: true
+  image: registry.aliyuncs.com/leansw/mongo-connector
+  volumes_from:
+  - mongo-connector-conf
+  stdin_open: true
+mongo-connector-conf:
+  image: registry.aliyuncs.com/leansw/mongo-connector-conf
+  labels:
+    io.rancher.container.start_once: 'true'

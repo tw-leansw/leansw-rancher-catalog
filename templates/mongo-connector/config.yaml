@@ -1,0 +1,9 @@
+name: mongo-connector
+description: |
+  Mongo-connector
+version: 2.4.1-rancher1
+category: Continuous Integration
+maintainer: "ylli@thoughtworks.com"
+license: 
+projectURL: "www.thoughtworks.com"
+minimum_rancher_version: v0.59.0

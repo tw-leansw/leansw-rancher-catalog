@@ -1,54 +1,26 @@
-go-agent-node5-11-phantomjs2-1-1:
+go-agent16-9-0-dind:
   external_links:
   - ${goserver_ip}:gocd-server
   - ${goserver_ip}:go-server
   - ${rancherserver_ip}:rancher-server
-  - ${nexusserver_ip}:nexus.server
-  labels:
-    io.rancher.sidekicks: go-agent-node5-11-phantomjs2-1-1-data
-    io.rancher.container.pull_image: always
-  tty: true
-  image: registry.aliyuncs.com/leansw/go_agent_node5_11
-  volumes_from:
-  - go-agent-node5-11-phantomjs2-1-1-data
-  stdin_open: true
-  environment:
-  - AGENT_MEM=${mem_initial}m
-  - AGENT_MAX_MEM=${mem_max}m
-go-agent16-2-1-java8:
-  external_links:
-  - ${goserver_ip}:gocd-server
-  - ${goserver_ip}:go-server
-  - ${rancherserver_ip}:rancher-server
-  - ${nexusserver_ip}:nexus.server
+  - ${artifactory_server_ip}:artifactory.server
   log_driver: ''
   environment:
   - AGENT_MEM=${mem_initial}m
   - AGENT_MAX_MEM=${mem_max}m
   labels:
-    io.rancher.sidekicks: go-agent16-2-1-java8-data
+    io.rancher.sidekicks: go-agent16-9-0-dind-data
     io.rancher.container.pull_image: always
   tty: true
   dns:
   - 223.5.5.5
   - 223.6.6.6
   log_opt: {}
-  image: registry.aliyuncs.com/leansw/go_agent16_2_1_java8
+  image: registry.cn-hangzhou.aliyuncs.com/leansw/go_agent_dind:16.9.0
   volumes_from:
   - go-agent16-2-1-java8-data
   stdin_open: true
-go-agent-node5-11-phantomjs2-1-1-data:
-  labels:
-    io.rancher.container.start_once: 'true'
-  command:
-  - cat
-  tty: true
-  image: registry.aliyuncs.com/leansw/go_agent_m2_data
-  volumes:
-  - /var/go/.m2
-  - /var/lib/go-agent/pipelines
-  stdin_open: true
-go-agent16-2-1-java8-data:
+go-agent16-9-0-dind-data:
   labels:
     io.rancher.container.start_once: 'true'
   command:
