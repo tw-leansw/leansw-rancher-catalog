@@ -6,6 +6,13 @@
   uuid: leansw-mongo-connector-0 
   minimum_rancher_version: v0.59.0
   questions: 
+    - variable: "mongo-server"
+      description: |
+        Choose the gocd service to connect.
+      label: "Mong server primary node"
+      default: "mongo-sever/mongo-server"
+      required: true
+      type: "service"
 mongo-connector:
   scale: 1
 mongo-connector-conf:
