@@ -4,10 +4,6 @@ go-agent16-9-0-dind:
   - ${goserver_ip}:go-server
   - ${rancherserver_ip}:rancher-server
   - ${artifactory_server_ip}:artifactory.server
-  log_driver: ''
-  environment:
-  - AGENT_MEM=${mem_initial}m
-  - AGENT_MAX_MEM=${mem_max}m
   labels:
     io.rancher.sidekicks: go-agent16-9-0-dind-data
     io.rancher.container.pull_image: always
@@ -18,7 +14,7 @@ go-agent16-9-0-dind:
   log_opt: {}
   image: registry.cn-hangzhou.aliyuncs.com/leansw/go_agent_dind:16.9.0
   volumes_from:
-  - go-agent16-2-1-java8-data
+  - go-agent16-9-0-dind-data
   stdin_open: true
 go-agent16-9-0-dind-data:
   labels:
@@ -28,6 +24,6 @@ go-agent16-9-0-dind-data:
   tty: true
   image: registry.aliyuncs.com/leansw/go_agent_m2_data
   volumes:
-  - /var/go/.m2
-  - /var/lib/go-agent/pipelines
+  - /root/.m2
+  - /run/go-agent/pipelines
   stdin_open: true
