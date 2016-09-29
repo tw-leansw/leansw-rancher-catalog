@@ -2,7 +2,7 @@
   name: mongo-connector
   version: 2.4-rancher1
   description: |
-    Go Agents for go leanSW
+    Mongo mongo-connector
   uuid: leansw-mongo-connector-0 
   minimum_rancher_version: v0.59.0
   questions: 
