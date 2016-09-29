@@ -1,6 +1,6 @@
 .catalog:
   name: leansw-go-agents
-  version: 16.2.1-rancher1
+  version: 16.9.0-dind-rancher1
   description: |
     Go Agents for go leanSW
   uuid: leansw-go-agents-0 
