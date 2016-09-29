@@ -1,4 +1,6 @@
 go-agent16-9-0-dind:
+  environment:
+    GO_SERVER: gocd-server
   external_links:
   - ${goserver_ip}:gocd-server
   - ${goserver_ip}:go-server
@@ -8,14 +10,12 @@ go-agent16-9-0-dind:
     io.rancher.sidekicks: go-agent16-9-0-dind-data
     io.rancher.container.pull_image: always
   tty: true
-  dns:
-  - 223.5.5.5
-  - 223.6.6.6
   log_opt: {}
   image: registry.cn-hangzhou.aliyuncs.com/leansw/go_agent_dind:16.9.0
   volumes_from:
   - go-agent16-9-0-dind-data
   stdin_open: true
+  privileged: true
 go-agent16-9-0-dind-data:
   labels:
     io.rancher.container.start_once: 'true'
