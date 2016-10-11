@@ -7,7 +7,7 @@ deliflow-gocd-server:
     io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
   tty: true
   image:
-     gocd/gocd-server:16.7.0
+     gocd/gocd-server:16.9.0
   stdin_open: true
 deliflow-mongo-sever:
   ports:

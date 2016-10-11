@@ -105,6 +105,7 @@ deliflow-identity-service:
   links:
   - deliflow-discovery-service:eureka-server
   - deliflow-mysql:mysql-server
+  - deliflow-mongdb:mongo-server1
   - deliflow-gocd-server:gocd-server
   stdin_open: true
 delilflow-sonarqube-mysql:
@@ -179,7 +180,7 @@ deliflow-gocd-server:
   labels:
     io.rancher.container.pull_image: always
   tty: true
-  image: registry.aliyuncs.com/leansw/gocd-server:quick-start
+  image: registry.aliyuncs.com/leansw/gocd-server:16.9.0
   links:
   - deliflow-cd-metrics-service:cd-metrics
   stdin_open: true
