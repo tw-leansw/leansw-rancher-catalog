@@ -138,7 +138,7 @@ deliflow-identity-service:
   image: registry.aliyuncs.com/leansw/identity-services:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
-  - deliflow-mongdb:mongo-server1
+  - deliflow-mongo:mongo-server1
   - deliflow-gocd-server:gocd-server
   stdin_open: true
 delilflow-sonarqube-mysql:

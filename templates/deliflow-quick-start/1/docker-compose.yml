@@ -105,7 +105,7 @@ deliflow-identity-service:
   links:
   - deliflow-discovery-service:eureka-server
   - deliflow-mysql:mysql-server
-  - deliflow-mongdb:mongo-server1
+  - deliflow-mongo:mongo-server1
   - deliflow-gocd-server:gocd-server
   stdin_open: true
 delilflow-sonarqube-mysql:
