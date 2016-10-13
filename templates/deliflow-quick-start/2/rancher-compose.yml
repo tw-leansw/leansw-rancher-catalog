@@ -1,0 +1,59 @@
+.catalog:
+  name: deliflow-quick-start
+  version: 1.0.0-rancher2
+  description: |
+    Deliflow Quick Start
+    All Deliflow Services + UI
+    SonarQube  Artifactory  GoCD-server GoCD-agent MongoDB MySQL rabbitmq
+  uuid: deliflow-quick-start-0
+  minimum_rancher_version: v1.0.0
+  questions:
+    - variable: "rancherserver_ip"
+      description: |
+        Choose the Rancher service to connect.
+      label: "Rancher server IP address"
+      default: "10.0.0.1"
+      required: true
+      type: "string"
+    - variable: "docker_image_tag"
+      description: |
+        Docker Image Tag : latest/release etc.
+      label: Docker Image Tag
+      default: "latest"
+      required: true
+      type: "string"
+    - variable: "app_service_home"
+      description: |
+        The Web app's root url example: https://www.exmaple.org/
+      label: Web App Home url
+      default: "https://dev.ui.twleansw.com"
+      required: true
+      type: "string"
+deliflow-webapp-lb:
+  scale: 1
+  load_balancer_config:
+    haproxy_config: {}
+  health_check:
+    port: 42
+    interval: 2000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    response_timeout: 2000
+
+deliflow-code-metrics-service:
+  scale: 1
+deliflow-identity-service:
+  scale: 1
+deliflow-auth-service:
+  scale: 1
+deliflow-discovery-service:
+  scale: 1
+deliflow-cd-metrics-service:
+  scale: 1
+deliflow-quartz-service:
+  scale: 1 
+deliflow-webapp:
+  scale: 1
+rancher-server:
+  external_ips:
+  - ${rancherserver_ip}
