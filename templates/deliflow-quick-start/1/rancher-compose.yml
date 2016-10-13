@@ -1,6 +1,6 @@
 .catalog:
   name: deliflow-quick-start
-  version: 1.0.0-rancher2
+  version: 1.0.0-rancher1
   description: |
     Deliflow Quick Start
     All Deliflow Services + UI

@@ -4,7 +4,7 @@
   description: |
     Deliflow Quick Start
     All Deliflow Services + UI
-    SonarQube  Artifactory  GoCD-server GoCD-agent MongoDB MySQL rabbitmq
+    SonarQube  Artifactory GoCD-server GoCD-agent MongoDB MySQL rabbitmq
   uuid: deliflow-quick-start-0
   minimum_rancher_version: v1.0.0
   questions:
