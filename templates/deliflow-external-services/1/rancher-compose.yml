@@ -17,7 +17,7 @@ deliflow-artifactory-server:
   scale: 1
 deliflow-rabbitmq-server:
   scale: 1
-deliflow-rabbitmq-server:
+deliflow-elasticsearch-server:
   scale: 1
 deliflow-kibana-server:
   scale: 1
