@@ -52,9 +52,7 @@ deliflow-cd-metrics-service:
   environment:
     RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
     RANCHER_SECRET_KEY: E7xmHz2h22iJWUpf1atDEnqsd2zzv9udHdsQkjjy
-    RANCHER_URI: http://rancher-server:8080
-  external_links:
-  - rancher-server:rancher-server
+    RANCHER_URI: http://${rancherserver_ip}
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name

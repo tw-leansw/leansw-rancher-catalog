@@ -11,8 +11,8 @@
     - variable: "rancherserver_ip"
       description: |
         Choose the Rancher service to connect.
-      label: "Rancher server IP address"
-      default: "10.0.0.1"
+      label: "Rancher server IP address and port"
+      default: "172.17.0.2:8080"
       required: true
       type: "string"
     - variable: "docker_image_tag"
@@ -54,6 +54,3 @@ deliflow-quartz-service:
   scale: 1 
 deliflow-webapp:
   scale: 1
-rancher-server:
-  external_ips:
-  - ${rancherserver_ip}
