@@ -1,10 +1,10 @@
 .catalog:
   name: deliflow-external-services
-  version: 1.0.0-rancher1
+  version: 1.0.0-rancher-v1
   description: |
-    Deliflow UI(Web) And Services
-  uuid: deliflow-external-services-0
-  minimum_rancher_version: v0.59.0
+    Deliflow infrastructure services
+  uuid: deliflow-external-services-v1
+  minimum_rancher_version: v1.0.0
   questions:
     - variable: "mem_initial"
       description: "Initial java memory in Mb"

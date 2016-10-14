@@ -1,0 +1,95 @@
+version: '2'
+services:
+  deliflow-gocd-server:
+    ports:
+    - 8153:8153/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    image:
+       gocd/gocd-server:16.10.0
+    stdin_open: true
+  deliflow-mongo-sever:
+    ports:
+    - 27017:27017/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    image:
+      mongo:3.3.15
+    stdin_open: true
+  deliflow-mysql-sever:
+    ports:
+    - 3306:3306/tcp
+    environment:
+      MYSQL_DATABASE: sonar
+      MYSQL_USER: sonar
+      MYSQL_PASSWORD: sonar
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    image:
+      mysql:5.7.15
+    stdin_open: true
+  deliflow-sonar-sever:
+    ports:
+    - 9000:9000/tcp
+    links:
+    - deliflow-mysql-sever:mysql
+    environment:
+      SONARQUBE_JDBC_USERNAME: sonar
+      SONARQUBE_JDBC_PASSWORD: sonar
+      SONARQUBE_JDBC_URL: jdbc:mysql://mysql/sonar
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    entrypoint:
+      - bash - c ./bin/run.sh -Dsonar.web.context=/sonar
+    image:
+      sonarqube:6.1-alpine
+    stdin_open: true
+  deliflow-artifactory-sever:
+    ports:
+    - 8080:8080/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    image:
+      mattgruter/artifactory:3.9.2
+    stdin_open: true
+  deliflow-rabbitmq:
+    ports:
+    - 5672:5672/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    image:
+      rabbitmq:3.6.5
+    stdin_open: true
+  deliflow-kibana:
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    links:
+    - deliflow-elasticsearch:elasticsearch
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.hostname_override: container_name
+    tty: true
+    image: kibana:5.0.0
+  deliflow-elasticsearch:
+    ports:
+    - 9200:9200/tcp
+    - 9300:9300/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+    tty: true
+    image:
+      elasticsearch:5.0.0
+    stdin_open: true

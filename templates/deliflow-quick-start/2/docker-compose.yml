@@ -235,4 +235,14 @@ deliflow-rabbitmq:
   tty: true
   image: registry.aliyuncs.com/leansw/rabbitmq:3
   stdin_open: true
-
+deliflow-kibana:
+  environment:
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+  external_links:
+  - elasticsearch-2/elasticsearch-clients:elasticsearch
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: kibana:4.4.2
+deliflow-elasticsearch:
