@@ -3,36 +3,22 @@
   version: 1.0.0-rancher-v1
   description: |
     Deliflow infrastructure services
-  uuid: deliflow-external-services-v1
+  uuid: deliflow-external-services1
   minimum_rancher_version: v1.0.0
-  questions:
-    - variable: "mem_initial"
-      description: "Initial java memory in Mb"
-      label: "Initial memory:"
-      required: true
-      default: 256
-      type: "int"
-    - variable: "mem_max"
-      description: "Max java memory in Mb"
-      label: "Max memory:"
-      required: true
-      default: 512
-      type: "int"
-    - variable: "host_env_label"
-      description: |
-        Host Env Label(soft)
-      label: "Host Env Label"
-      default: "dev"
-      required: true
-      type: "string"
 
 deliflow-gocd-server:
   scale: 1
-deliflow-mongo-sever:
+deliflow-mongo-server:
   scale: 1
-deliflow-mysql-sever:
+deliflow-mysql-server:
   scale: 1
-deliflow-sonar-sever:
+deliflow-sonar-server:
   scale: 1
-deliflow-artifactory-sever:
+deliflow-artifactory-server:
+  scale: 1
+deliflow-rabbitmq-server:
+  scale: 1
+deliflow-rabbitmq-server:
+  scale: 1
+deliflow-kibana-server:
   scale: 1
