@@ -71,16 +71,6 @@ deliflow-rabbitmq-server:
   image:
     rabbitmq:3.6.5
   stdin_open: true
-deliflow-kibana-server:
-  environment:
-    ELASTICSEARCH_URL: http://elasticsearch:9200
-  links:
-  - deliflow-elasticsearch:elasticsearch
-  labels:
-    io.rancher.container.pull_image: always
-    io.rancher.container.hostname_override: container_name
-  tty: true
-  image: kibana:4.6.1
 deliflow-elasticsearch-server:
   ports:
   - 9200:9200/tcp
@@ -92,3 +82,13 @@ deliflow-elasticsearch-server:
   image:
     elasticsearch:2.4.1
   stdin_open: true
+deliflow-kibana-server:
+  environment:
+    ELASTICSEARCH_URL: http://elasticsearch:9200
+  links:
+  - deliflow-elasticsearch-server:elasticsearch
+  labels:
+    io.rancher.container.pull_image: always
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: kibana:4.6.1
