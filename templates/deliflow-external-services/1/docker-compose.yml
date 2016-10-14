@@ -22,6 +22,7 @@ deliflow-mysql-server:
   ports:
   - 3306:3306/tcp
   environment:
+    MYSQL_ROOT_PASSWORD: Leanswdev1
     MYSQL_DATABASE: sonar
     MYSQL_USER: sonar
     MYSQL_PASSWORD: sonar
