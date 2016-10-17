@@ -41,13 +41,11 @@ deliflow-sonar-server:
   environment:
     SONARQUBE_JDBC_USERNAME: sonar
     SONARQUBE_JDBC_PASSWORD: sonar
-    SONARQUBE_JDBC_URL: jdbc:mysql://mysql/sonar
+    SONARQUBE_JDBC_URL: jdbc:mysql://mysql/sonar?useUnicode=true&characterEncoding=utf8
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
-  entrypoint:
-    - bash - c ./bin/run.sh -Dsonar.web.context=/sonar
   image:
     sonarqube:6.1-alpine
   stdin_open: true
