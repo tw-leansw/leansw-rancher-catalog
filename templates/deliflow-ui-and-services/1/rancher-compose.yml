@@ -6,18 +6,6 @@
   uuid: deliflow-ui-and-services-0
   minimum_rancher_version: v0.59.0
   questions:
-    - variable: "mem_initial"
-      description: "Initial java memory in Mb"
-      label: "Initial memory:"
-      required: true
-      default: 256
-      type: "int"
-    - variable: "mem_max"
-      description: "Max java memory in Mb"
-      label: "Max memory:"
-      required: true
-      default: 512
-      type: "int"
     - variable: "app_service_home"
       description: |
         The Web app's root url example: https://www.exmaple.org/
@@ -25,7 +13,7 @@
       default: "https://dev.ui.twleansw.com"
       required: true
       type: "string"
-    - variable: "goserver_ip"
+    - variable: "gocdserver_ip"
       description: |
         Choose the gocd service to connect.
       label: "Gocd server stack/service"
@@ -53,14 +41,7 @@
       default: "artifactory-sever/artifactory-server"
       required: true
       type: "service"
-    - variable: "mongoserver1_ip"
-      description: |
-        Choose the mongodb to connect.
-      label: "MongoDB service stack/service"
-      default: "mongo-sever/mongo-server"
-      required: true
-      type: "service"
-    - variable: "mongoserver2_ip"
+    - variable: "mongoserver_ip"
       description: |
         Choose the mongodb to connect.
       label: "MongoDB service stack/service"
@@ -100,4 +81,5 @@ deliflow-quartz-service:
   scale: 1 
 deliflow-graph-service:
   scale: 1
-
+deliflow-webapp:
+  scale: 1
