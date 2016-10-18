@@ -51,7 +51,7 @@ deliflow-sonar-server:
   stdin_open: true
 deliflow-artifactory-server:
   ports:
-  - 8000:8080/tcp
+  - 8081:8080/tcp
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
