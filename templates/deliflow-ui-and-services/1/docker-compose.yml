@@ -62,6 +62,8 @@ deliflow-identity-service:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
 deliflow-discovery-service:
+  ports:
+  - 8761:8761/tcp
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
