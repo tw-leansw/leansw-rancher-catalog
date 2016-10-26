@@ -10,7 +10,7 @@
       description: |
         The Web app's root url example: https://www.exmaple.org/
       label: Web App Home url
-      default: "https://dev.ui.twleansw.com"
+      default: "https://ui.dev.twleansw.com"
       required: true
       type: "string"
     - variable: "gocdserver_ip"
