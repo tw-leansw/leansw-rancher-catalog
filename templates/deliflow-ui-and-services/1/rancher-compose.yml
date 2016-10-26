@@ -57,9 +57,9 @@
       type: "service"
     - variable: "docker_image_tag"
       description: |
-        Docker Image Tag : latest/release etc.
+        Docker Image Tag : dev/rc/release.
       label: Docker Image Tag
-      default: "latest"
+      default: "dev"
       required: true
       type: "string"
     - variable: "host_env_label"
