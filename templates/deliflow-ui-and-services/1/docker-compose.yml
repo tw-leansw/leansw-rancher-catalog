@@ -17,12 +17,12 @@ deliflow-code-metrics-service:
     echo $$EUREKA_INSTANCE_HOSTNAME &&
     PROFILE=$${ACTIVE_PROFILE:=docker} &&
     java -Xmx512m -Djava.security.egd=file:/dev/./urandom
-      -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService
-      --logging.level.sun.net.www.http=DEBUG
-      --eureka.instance.preferIpAddress=false
-      --spring.profiles.active=$$PROFILE
-      --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-      --app.service.home=${app_service_home}
+    -cp $JAVA_HOME/lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService
+    --logging.level.sun.net.www.http=DEBUG
+    --eureka.instance.preferIpAddress=false
+    --spring.profiles.active=$$PROFILE
+    --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    --app.service.home=${app_service_home}
   image: reg.dev.twleansw.com/leansw/code-metrics:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
@@ -32,6 +32,7 @@ deliflow-identity-service:
   - 2400:2400/tcp
   external_links:
   - ${gocdserver_ip}:gocd-server
+  - ${mongoserver_ip}:mongo-server
   labels:
     io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
