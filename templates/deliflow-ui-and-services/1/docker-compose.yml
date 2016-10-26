@@ -201,7 +201,7 @@ deliflow-graph-service:
     --eureka.instance.preferIpAddress=false
     --spring.profiles.active=$$PROFILE
     --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
-  image: reg.dev.twleansw.com/leansw/deliflow-graph-service:${docker_image_tag}
+  image: reg.dev.twleansw.com/leansw/graph-service:${docker_image_tag}
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
