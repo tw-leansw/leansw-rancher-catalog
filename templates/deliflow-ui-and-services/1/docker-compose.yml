@@ -205,3 +205,14 @@ deliflow-graph-service:
   links:
   - deliflow-discovery-service:eureka-server
   stdin_open: true
+deliflow-cas-service:
+  ports:
+  - 8443:8443/tcp
+  labels:
+    io.rancher.container.pull_image: always
+    io.ranhcer.container.hostname_override: container_name
+    io.rancher.scheduler.affinity:host_label_soft: host_env=${host_env_label}
+  tty: true
+  image: reg.dev.twleansw.com/leansw/cas-service:${docker_image_tag}
+  external_links:
+  - ${ldapserver_ip}:deliflow-ldap-server

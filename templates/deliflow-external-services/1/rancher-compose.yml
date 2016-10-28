@@ -4,6 +4,13 @@
   description: Deliflow External Services
   uuid: deliflow-external-services-0
   minimum_rancher_version: v1.0.0
+  questions:
+    - variable: "ldap_admin_password"
+      description: |
+        LDAP admin user's password
+      label: LDAP admin password
+      required: true
+      type: "password"
 
 deliflow-gocd-server:
   scale: 1
@@ -17,7 +24,7 @@ deliflow-artifactory-server:
   scale: 1
 deliflow-rabbitmq-server:
   scale: 1
-deliflow-elasticsearch-server:
+deliflow-openldap-server:
   scale: 1
-deliflow-kibana-server:
+deliflow-phpldapadmin-server:
   scale: 1
