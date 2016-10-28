@@ -2,7 +2,6 @@ deliflow-gocd-server:
   ports:
   - 8153:8153/tcp
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -12,7 +11,6 @@ deliflow-mongo-server:
   ports:
   - 27017:27017/tcp
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -27,7 +25,6 @@ deliflow-mysql-server:
     MYSQL_USER: sonar
     MYSQL_PASSWORD: sonar
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -43,7 +40,6 @@ deliflow-sonar-server:
     SONARQUBE_JDBC_PASSWORD: sonar
     SONARQUBE_JDBC_URL: jdbc:mysql://mysql/sonar?useUnicode=true&characterEncoding=utf8
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -53,7 +49,6 @@ deliflow-artifactory-server:
   ports:
   - 8081:8080/tcp
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -63,7 +58,6 @@ deliflow-rabbitmq-server:
   ports:
   - 5672:5672/tcp
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -78,7 +72,6 @@ deliflow-openldap-server:
     LDAP_DOMAIN: deliflow.com
     LDAP_ADMIN_PASSWORD: ${ldap_admin_password}
   labels:
-    io.rancher.container.pull_image: always
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
@@ -93,7 +86,6 @@ deliflow-phpldapadmin-server:
   links:
   - deliflow-openldap-server:ldap-host
   labels:
-    io.rancher.container.pull_image: always
     io.rancher.container.hostname_override: container_name
   tty: true
   image: reg.dev.twleansw.com/leansw/phpldapadmin:0.6.11-xfs  # osixia/phpldapadmin:0.6.11
