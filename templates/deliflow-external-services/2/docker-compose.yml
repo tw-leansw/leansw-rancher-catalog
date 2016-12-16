@@ -47,7 +47,7 @@ deliflow-sonar-server:
   stdin_open: true
 deliflow-artifactory-server:
   ports:
-  - 8081:8080/tcp
+  - 8081:8081/tcp
   labels:
     io.ranhcer.container.hostname_override: container_name
   tty: true
