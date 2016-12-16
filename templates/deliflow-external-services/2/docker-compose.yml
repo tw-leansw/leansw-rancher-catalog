@@ -52,7 +52,7 @@ deliflow-artifactory-server:
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
-    mattgruter/artifactory:3.9.2
+    docker.bintray.io/jfrog/artifactory-oss:4.13.0
   stdin_open: true
 deliflow-rabbitmq-server:
   ports:
