@@ -1,0 +1,18 @@
+.catalog:
+  name: deliflow-external-services
+  version: 1.0.2-rancher2-noldap
+  description: Deliflow External Services
+  uuid: deliflow-external-services-0
+  minimum_rancher_version: v1.0.0
+deliflow-gocd-server:
+  scale: 1
+deliflow-mongo-server:
+  scale: 1
+deliflow-mysql-server:
+  scale: 1
+deliflow-sonar-server:
+  scale: 1
+deliflow-artifactory-server:
+  scale: 1
+deliflow-rabbitmq-server:
+  scale: 1
