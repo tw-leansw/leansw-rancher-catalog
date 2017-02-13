@@ -5,7 +5,7 @@ deliflow-gocd-server:
     io.ranhcer.container.hostname_override: container_name
   tty: true
   image:
-     gocd/gocd-server:16.10.0
+     gocd/gocd-server:17.1.0
   stdin_open: true
 deliflow-mongo-server:
   ports:
