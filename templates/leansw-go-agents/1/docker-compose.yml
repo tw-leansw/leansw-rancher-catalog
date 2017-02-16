@@ -1,18 +1,18 @@
-go-agent16-9-0-remote-docker:
+go-agent16-11-0-remote-docker:
   environment:
     GO_SERVER: gocd-server
     GOCD_SERVER: gocd-server
-  external_links:
-  - ${goserver_ip}:gocd-server
-  - ${rancherserver_ip}:rancher-server
-  - ${artifactory_server_ip}:artifactory.server
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.container.start_once: 'true'
+    io.rancher.scheduler.affinity:host_label: host_agent=true
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=go-agent16-11-0-remote-docker
+    io.rancher.scheduler.affinity:host_label_ne: host_role=services
   tty: true
-  image: registry.cn-hangzhou.aliyuncs.com/leansw/go_agent_docker:16.9.0-3
-  privileged: true
+  image: reg.dev.twleansw.com/leansw/go_agent_docker:16.11.0-20
   volumes:
   - /var/run/docker.sock:/var/run/docker.sock
   - /run/go-agent/pipelines:/run/go-agent/pipelines
   - /root:/root
-  stdin_open: true
+  privileged: true
+  net: host

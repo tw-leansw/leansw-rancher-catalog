@@ -1,11 +1,11 @@
 .catalog:
   name: leansw-go-agents
-  version: 16.9.0-dind-rancher1
+  version: 16.9.0-remote-docker-rancher1
   description: |
     Go Agents for go leanSW
-  uuid: leansw-go-agents-0 
+  uuid: leansw-go-agents-0
   minimum_rancher_version: v0.59.0
-  questions: 
+  questions:
     - variable: "mem_max"
       description: "Max java memory in Mb"
       label: "Max memory:"
@@ -14,26 +14,24 @@
       type: "int"
     - variable: "goserver_ip"
       description: |
-        Choose the gocd service to connect. 
+        Choose the gocd service to connect.
       label: "Gocd server stack/service"
       default: "gocd-sever/gocd-server"
       required: true
       type: "service"
     - variable: "rancherserver_ip"
       description: |
-        Choose the rancher service to connect. 
+        Choose the rancher service to connect.
       label: "Rancher server stack/service"
       default: "rancher-sever/rancher-server"
       required: true
       type: "service"
     - variable: "artifactory_server_ip"
       description: |
-        Choose the artifactory service to connect. 
+        Choose the artifactory service to connect.
       label: "Artifactory server stack/service"
       default: "artifactory-sever/artifactory-server"
       required: true
       type: "service"
-go-agent16-9-0-dind:
-  scale: 1
-go-agent16-9-0-dind-data:
+go-agent16-11-0-remote-docker:
   scale: 1
