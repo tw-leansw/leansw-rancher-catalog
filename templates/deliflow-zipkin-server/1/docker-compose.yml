@@ -1,0 +1,26 @@
+version: '2'
+services:
+  zipkin:
+    image: openzipkin/zipkin
+    environment:
+      MYSQL_HOST: mysql
+      STORAGE_TYPE: mysql
+    links:
+    - storage:mysql
+    ports:
+    - 9410:9410/tcp
+    - 9411:9411/tcp
+  storage:
+    image: openzipkin/zipkin-mysql
+  dependencies:
+    image: openzipkin/zipkin-dependencies
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PASS: zipkin
+      MYSQL_USER: zipkin
+      STORAGE_TYPE: mysql
+    entrypoint:
+    - crond
+    - -f
+    links:
+    - storage:mysql

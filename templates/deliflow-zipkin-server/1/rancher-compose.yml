@@ -1,0 +1,17 @@
+.catalog:
+  name: deliflow-zipkin-server
+  version: 1.0.3-rancher
+  description: Deliflow Zipkin server
+  uuid: deliflow-zipkin-server-0
+  minimum_rancher_version: v1.0.0
+version: '2'
+services:
+  zipkin:
+    scale: 1
+    start_on_create: true
+  storage:
+    scale: 1
+    start_on_create: true
+  dependencies:
+    scale: 1
+    start_on_create: true

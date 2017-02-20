@@ -2,7 +2,7 @@
   name: deliflow-external-services
   version: 1.0.2-rancher2-noldap
   description: Deliflow External Services
-  uuid: deliflow-external-services-0
+  uuid: deliflow-external-services-1
   minimum_rancher_version: v1.0.0
 deliflow-gocd-server:
   scale: 1

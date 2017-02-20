@@ -1,0 +1,53 @@
+.catalog:
+  name: deliflow-external-services
+  version: 1.0.3-rancher
+  description: Deliflow External Services
+  uuid: deliflow-external-services-2
+  minimum_rancher_version: v1.0.0
+  questions:
+    - variable: "rancherserver_ip"
+      description: |
+        Choose the rancher server to connect.
+      label: "Rancher server ip"
+      default: "xxx.xxx.xxx.xxx"
+      required: true
+      type: "string"
+version: '2'
+services:
+  deliflow-mongo-server:
+    scale: 1
+    start_on_create: true
+  deliflow-gocd-server:
+    scale: 1
+    start_on_create: true
+  deliflow-artifactory-server:
+    scale: 1
+    start_on_create: true
+  deliflow-phpldapadmin-server:
+    scale: 1
+    start_on_create: true
+  deliflow-openldap-server:
+    scale: 1
+    start_on_create: true
+  sonar-volume:
+    scale: 1
+    start_on_create: true
+  gocd-volumes:
+    scale: 1
+    start_on_create: true
+  rancher-server:
+    external_ips:
+    - ${rancherserver_ip}
+    start_on_create: true
+  deliflow-mysql-server:
+    scale: 1
+    start_on_create: true
+  deliflow-rabbitmq-server:
+    scale: 1
+    start_on_create: true
+  deliflow-sonar-server:
+    scale: 1
+    start_on_create: true
+  artifactory-data:
+    scale: 1
+    start_on_create: true

@@ -1,0 +1,176 @@
+version: '2'
+services:
+  deliflow-cas-service:
+    image: reg.dev.twleansw.com/leansw/cas-service:rc
+    environment:
+      LDAP_URL: ldap://cas.demo.twleansw.com:389
+      SERVER_NAME: https://cas.demo.twleansw.com:8443
+      HOST_NAME: cas.demo.twleansw.com
+    network_mode: bridge
+    tty: true
+    ports:
+    - 8443:8443/tcp
+    - 9080:9080/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  gocd-server:
+    image: rancher/dns-service
+    external_links:
+    - ${gocdserver_ip}:deliflow-gocd-server
+  deliflow-identity-service:
+    image: reg.dev.twleansw.com/leansw/identity-services:dev
+    stdin_open: true
+    entrypoint:
+    - dockerize
+    - -wait
+    - tcp://eureka-server:8761
+    - -wait
+    - tcp://mongo-server:27017
+    - -timeout
+    - 120s
+    - bash
+    - -c
+    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip)&& echo $$EUREKA_INSTANCE_HOSTNAME  && PROFILE=$${ACTIVE_PROFILE:=docker} && HOST=$${GOCD_SERVER_HOST:=gocd-server} && PORT=$${GOCD_SERVER_PORT:=8153} && ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} && USERNAME=$${GOCD_USERNAME:=admin} && PASSWORD=$${GOCD_PASSWORD:=badger} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/identity-services.jar com.thoughtworks.lean.identity.IdentityServer --spring.profiles.active=$$PROFILE --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH --gocd.server.username=$$USERNAME --gocd.server.password=$$PASSWORD --eureka.instance.preferIpAddress=false --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    tty: true
+    ports:
+    - 2400:2400/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  deliflow-quartz-service:
+    image: reg.dev.twleansw.com/leansw/quartz-service:dev
+    stdin_open: true
+    entrypoint:
+    - dockerize
+    - -wait
+    - tcp://eureka-server:8761
+    - -wait
+    - tcp://mongo-server:27017
+    - -timeout
+    - 120s
+    - bash
+    - -c
+    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && echo $$EUREKA_INSTANCE_HOSTNAME && PROFILE=$${ACTIVE_PROFILE:=docker} && HOST=$${GOCD_SERVER_HOST:=gocd-server} && PORT=$${GOCD_SERVER_PORT:=8153} && ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} && USERNAME=$${GOCD_USERNAME:=admin} && PASSWORD=$${GOCD_PASSWORD:=badger} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/quartz-service.jar com.thoughtworks.lean.quartz.QuartzService --spring.profiles.active=$$PROFILE --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH --gocd.server.username=$$USERNAME --gocd.server.password=$$PASSWORD --eureka.instance.preferIpAddress=false --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    tty: true
+    ports:
+    - 9005:9005/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  deliflow-code-metrics-service:
+    image: reg.dev.twleansw.com/leansw/code-metrics:dev
+    stdin_open: true
+    entrypoint:
+    - dockerize
+    - -wait
+    - tcp://eureka-server:8761
+    - -wait
+    - tcp://sonar-server:9000
+    - -wait
+    - tcp://mongo-server:27017
+    - -timeout
+    - 120s
+    - bash
+    - -c
+    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && echo $$EUREKA_INSTANCE_HOSTNAME && PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService --logging.level.sun.net.www.http=DEBUG --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME" --app.service.home=https://ui.demo.twleansw.com
+    tty: true
+    ports:
+    - 9003:9003/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  deliflow-discovery-service:
+    image: reg.dev.twleansw.com/leansw/discovery-service:dev
+    stdin_open: true
+    tty: true
+    ports:
+    - 8761:8761/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  rabbitmq-server:
+    image: rancher/dns-service
+    external_links:
+    - ${rabbitmqserver_ip}:deliflow-rabbitmq-server
+  eureka-server:
+    image: rancher/dns-service
+    links:
+    - deliflow-discovery-service:deliflow-discovery-service
+  deliflow-cd-metrics-service:
+    image: reg.dev.twleansw.com/leansw/cd-metrics:dev
+    environment:
+      RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
+      RANCHER_SECRET_KEY: E7xmHz2h22iJWUpf1atDEnqsd2zzv9udHdsQkjjy
+      RANCHER_URI: http://rancher-server:8080
+    stdin_open: true
+    entrypoint:
+    - dockerize
+    - -wait
+    - tcp://eureka-server:8761
+    - -wait
+    - tcp://gocd-server:8153
+    - -wait
+    - tcp://mongo-server:27017
+    - -timeout
+    - 120s
+    - bash
+    - -c
+    - sleep 5 && export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && echo $$EUREKA_INSTANCE_HOSTNAME && PROFILE=$${ACTIVE_PROFILE:=docker} && HOST=$${GOCD_SERVER_HOST:=gocd-server} && PORT=$${GOCD_SERVER_PORT:=8153} && ROOT_PATH=$${GOCD_SERVER_ROOT:=/go} && USERNAME=$${GOCD_USERNAME:=admin} && PASSWORD=$${GOCD_PASSWORD:=badger} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/cd-metrics.jar com.thoughtworks.lean.MetricsServer --rancher.uri=$$RANCHER_URI --rancher.secretKey=$$RANCHER_SECRET_KEY --rancher.accessSecret=$$RANCHER_ACCESS_SECRET --spring.profiles.active=$$PROFILE --gocd.server.host=http://$$HOST:$$PORT$$ROOT_PATH --gocd.server.username=$$USERNAME --gocd.server.password=$$PASSWORD --eureka.instance.preferIpAddress=false --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
+    tty: true
+    ports:
+    - 9001:9001/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  artifactory-server:
+    image: rancher/dns-service
+    external_links:
+    - ${artifactoryserver_ip}:deliflow-artifactory-server
+  sonar-server:
+    image: rancher/dns-service
+    external_links:
+    - ${sonarserver_ip}:deliflow-sonar-server
+  rancher-server:
+    image: rancher/dns-service
+    external_links:
+    - ${rancherserver_ip}:rancher-server
+  zipkin-server:
+    image: rancher/dns-service
+    external_links:
+    - ${zipkinserver_ip}:zipkin
+  deliflow-webapp:
+    image: reg.dev.twleansw.com/leansw/deliflow-webapp:dev
+    stdin_open: true
+    entrypoint:
+    - dockerize
+    - -wait
+    - tcp://deliflow-cd-metrics-service:9001
+    - -wait
+    - tcp://deliflow-code-metrics-service:9003
+    - -wait
+    - tcp://deliflow-identity-service:2400
+    - -wait
+    - tcp://deliflow-cas-service:8443
+    - -timeout
+    - 120s
+    - bash
+    - -c
+    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&  echo $$EUREKA_INSTANCE_HOSTNAME &&PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME" --security.oauth2.client.accessTokenUri="http://cas.demo.twleansw.com:9080/cas/oauth2.0/accessToken" --security.oauth2.client.userAuthorizationUri="https://cas.demo.twleansw.com:8443/cas/oauth2.0/authorize" --security.oauth2.resource.userInfoUri="http://cas.demo.twleansw.com:9080/cas/oauth2.0/profile" --app.service.home="https://ui.demo.twleansw.com:9900/" --cas.service.login="https://cas.demo.twleansw.com:8443/cas/login" --cas.service.logout="https://cas.demo.twleansw.com:8443/cas/logout" --cas.url.prefix="https://cas.demo.twleansw.com:8443/cas/" --app.admin.userName=admin@deliflow
+    tty: true
+    ports:
+    - 9900:9900/tcp
+    labels:
+      io.rancher.container.pull_image: always
+      io.ranhcer.container.hostname_override: container_name
+      io.rancher.scheduler.affinity:host_label_soft: host_env=dev
+  mongo-server:
+    image: rancher/dns-service
+    external_links:
+    - ${mongoserver_ip}:deliflow-mongo-server
