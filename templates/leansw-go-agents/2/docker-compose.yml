@@ -25,6 +25,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     - /usr/share/go-agent/pipelines:/usr/share/go-agent/pipelines
     - /run/go-agent/pipelines:/run/go-agent/pipelines
+    - /var/lib/go-agent/pipelines:/var/lib/go-agent/pipelines
     tty: true
     command:
     - bash
