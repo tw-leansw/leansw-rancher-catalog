@@ -1,0 +1,35 @@
+version: '2'
+services:
+  mvm-sonar-agent:
+    image: reg.dev.twleansw.com/leansw/go_agent_docker:17.1.0-4511-mvn-sonar
+    environment:
+      AGENT_KEY: ${agent_key}
+      AGENT_RESOURCES: mvn,sonar_scanner
+      GO_SERVER_URL: ${gocdserver_url}
+      AGENT_HOSTNAME: man_sonar_scanner
+    network_mode: host
+    volumes:
+    - /root/.m2:/var/go/.m2
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always
+  go-agent-remote-docker:
+    image: reg.dev.twleansw.com/leansw/go_agent_docker:17.1.0
+    environment:
+      AGENT_KEY: ${agent_key}
+      AGENT_RESOURCES: remote_docker
+      GO_SERVER_URL: ${gocdserver_url}
+      AGENT_HOSTNAME: remote_docker
+    network_mode: host
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/share/go-agent/pipelines:/usr/share/go-agent/pipelines
+    - /run/go-agent/pipelines:/run/go-agent/pipelines
+    tty: true
+    command:
+    - bash
+    - -c
+    - rm -rf /usr/share/go-agent/.agent-bootstrapper.running && chmod 0666 /var/run/docker.sock && /sbin/my_init
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=go-agent-remote-docker
