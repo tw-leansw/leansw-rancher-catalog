@@ -10,56 +10,56 @@
       description: |
         Choose the gocd service to connect.
       label: "Gocd server stack/service"
-      default: "deliflow-external-services/deliflow-gocd-server"
+      default: deliflow-external-services/deliflow-gocd-server
       required: true
       type: "service"
     - variable: "rancherserver_ip"
       description: |
         Choose the Rancher service to connect.
       label: "Rancher server stack/service"
-      default: "deliflow-external-services/deliflow-rancher-server"
+      default: deliflow-external-services/deliflow-rancher-server
       required: true
       type: "service"
     - variable: "sonarserver_ip"
       description: |
         Choose the SonarQube server to connect.
       label: "SonarQube server stack/service"
-      default: "deliflow-external-services/deliflow-sonar-server"
+      default: deliflow-external-services/deliflow-sonar-server
       required: true
       type: "service"
     - variable: "zipkinserver_ip"
       description: |
         Choose the Zipkin server to connect.
       label: "Zipkin server stack/service"
-      default: "deliflow-zipkin-server/zipkin"
+      default: deliflow-zipkin-server/zipkin
       required: true
       type: "service"
     - variable: "artifactoryserver_ip"
       description: |
         Choose the artifactory service to connect.
       label: "Artifactory server stack/service"
-      default: "deliflow-external-services/deliflow-artifactory-server"
+      default: deliflow-external-services/deliflow-artifactory-server
       required: true
       type: "service"
     - variable: "mongoserver_ip"
       description: |
         Choose the mongodb to connect.
       label: "MongoDB service stack/service"
-      default: "deliflow-external-services/deliflow-mongo-server"
+      default: deliflow-external-services/deliflow-mongo-server
       required: true
       type: "service"
     - variable: "rabbitmqserver_ip"
       description: |
         Choose the rabbitmq to connect.
       label: "Rabbitmq server stack/service"
-      default: "deliflow-external-services/deliflow-rabbitmq-server"
+      default: deliflow-external-services/deliflow-rabbitmq-server
       required: true
       type: "service"
     - variable: "ldapserver_ip"
       description: |
         Choose the LDAP to connect.
       label: "LDAP server stack/service"
-      default: "deliflow-external-services/deliflow-openldap-server"
+      default: deliflow-external-services/deliflow-openldap-server
       required: true
       type: "service"
     - variable: "docker_image_tag"
