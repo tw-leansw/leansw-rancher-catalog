@@ -93,6 +93,7 @@ services:
       MYSQL_USER: sonar
     stdin_open: true
     tty: true
+    network_mode: host
     ports:
     - 3306:3306/tcp
     labels:
@@ -109,7 +110,7 @@ services:
     image: sonarqube:5.6.5
     environment:
       SONARQUBE_JDBC_PASSWORD: sonar
-      SONARQUBE_JDBC_URL: jdbc:mysql://deliflow-mysql-server/sonarqube?useUnicode=true&characterEncoding=utf8
+      SONARQUBE_JDBC_URL: jdbc:mysql://mysql.demo.twleansw.com/sonarqube?useUnicode=true&characterEncoding=utf8
       SONARQUBE_JDBC_USERNAME: sonar
       SONARQUBE_LOG_LEVEL: DEBUG
     stdin_open: true
