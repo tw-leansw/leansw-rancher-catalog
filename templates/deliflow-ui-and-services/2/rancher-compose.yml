@@ -69,6 +69,20 @@
       default: "dev"
       required: true
       type: "string"
+    - variable: "cas_domain_name"
+      description: |
+        cas service domain name;
+      label: cas domain name
+      default: "cas.demo.twleansw.com"
+      required: true
+      type: "string"
+    - variable: "ui_domain_name"
+      description: |
+        deliflow ui domain name;
+      label: ui domain name
+      default: "ui.demo.twleansw.com"
+      required: true
+      type: "string"
 version: '2'
 services:
   deliflow-cas-service:

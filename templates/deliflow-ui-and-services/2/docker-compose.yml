@@ -3,9 +3,9 @@ services:
   deliflow-cas-service:
     image: reg.dev.twleansw.com/leansw/cas-service:rc
     environment:
-      LDAP_URL: ldap://cas.demo.twleansw.com:389
-      SERVER_NAME: https://cas.demo.twleansw.com:8443
-      HOST_NAME: cas.demo.twleansw.com
+      LDAP_URL: ldap://${cas_domain_name}:389
+      SERVER_NAME: https://${cas_domain_name}:8443
+      HOST_NAME: ${cas_domain_name}
     network_mode: bridge
     tty: true
     ports:
@@ -76,7 +76,7 @@ services:
     - 120s
     - bash
     - -c
-    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && echo $$EUREKA_INSTANCE_HOSTNAME && PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService --logging.level.sun.net.www.http=DEBUG --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME" --app.service.home=https://ui.demo.twleansw.com
+    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) && echo $$EUREKA_INSTANCE_HOSTNAME && PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/code-metrics.jar com.thoughtworks.lean.codemetrics.CodeMetricsService --logging.level.sun.net.www.http=DEBUG --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME"
     tty: true
     ports:
     - 9003:9003/tcp
@@ -162,7 +162,7 @@ services:
     - 120s
     - bash
     - -c
-    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&  echo $$EUREKA_INSTANCE_HOSTNAME &&PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME" --security.oauth2.client.accessTokenUri="http://cas.demo.twleansw.com:9080/cas/oauth2.0/accessToken" --security.oauth2.client.userAuthorizationUri="https://cas.demo.twleansw.com:8443/cas/oauth2.0/authorize" --security.oauth2.resource.userInfoUri="http://cas.demo.twleansw.com:9080/cas/oauth2.0/profile" --app.service.home="https://ui.demo.twleansw.com:9900/" --cas.service.login="https://cas.demo.twleansw.com:8443/cas/login" --cas.service.logout="https://cas.demo.twleansw.com:8443/cas/logout" --cas.url.prefix="https://cas.demo.twleansw.com:8443/cas/" --app.admin.userName=admin@deliflow
+    - sleep 5 &&export EUREKA_INSTANCE_HOSTNAME=$$(curl http://rancher-metadata.rancher.internal/latest/self/container/primary_ip) &&  echo $$EUREKA_INSTANCE_HOSTNAME &&PROFILE=$${ACTIVE_PROFILE:=docker} && java -Xmx512m -Djava.security.egd=file:/dev/./urandom -cp /lib/*:/lean/java/lib/*:/deliflow-webapp.jar com.thoughtworks.deliflow.DeliFlow --eureka.instance.preferIpAddress=false --spring.profiles.active=$$PROFILE --eureka.instance.hostname="$$EUREKA_INSTANCE_HOSTNAME" --security.oauth2.client.accessTokenUri="http://${cas_domain_name}:9080/cas/oauth2.0/accessToken" --security.oauth2.client.userAuthorizationUri="https://${cas_domain_name}:8443/cas/oauth2.0/authorize" --security.oauth2.resource.userInfoUri="http://${cas_domain_name}:9080/cas/oauth2.0/profile" --app.service.home="https://${ui_domain_name}:9900/" --cas.service.login="https://${cas_domain_name}:8443/cas/login" --cas.service.logout="https://${cas_domain_name}:8443/cas/logout" --cas.url.prefix="https://${cas_domain_name}:8443/cas/" --app.admin.userName=admin@deliflow
     tty: true
     ports:
     - 9900:9900/tcp
