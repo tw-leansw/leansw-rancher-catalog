@@ -1,9 +1,9 @@
 name: leansw-go-agents
 description: |
   Go Agents for go leanSW
-version: 16.9.0-dind-rancher1
+version: 1.0.3-rancher
 category: Continuous Integration
 maintainer: "ylli@thoughtworks.com"
-license: 
+license:
 projectURL: "www.thoughtworks.com"
 minimum_rancher_version: v0.59.0

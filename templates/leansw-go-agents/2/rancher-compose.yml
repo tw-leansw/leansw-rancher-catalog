@@ -1,0 +1,30 @@
+.catalog:
+  name: leansw-go-agents
+  version: 1.0.3-rancher
+  description: |
+    Deliflow Go Agents
+  uuid: leansw-go-agents-2
+  minimum_rancher_version: v0.59.0
+  questions:
+    - variable: "gocdserver_url"
+      description: |
+        The Gocd Server's root url example: https://gocd.twleansw.com:8154/go
+      label: Go Server Url
+      default: "https://gocd.twleansw.com:8154/go"
+      required: true
+      type: "string"
+    - variable: "agent_key"
+      description: |
+        The key for agent to connect go server
+      label: Agent Key
+      default: "123456789abcdef"
+      required: true
+      type: "string"
+version: '2'
+services:
+  official-agent:
+    scale: 1
+    start_on_create: true
+  go-agent-remote-docker:
+    scale: 1
+    start_on_create: true
