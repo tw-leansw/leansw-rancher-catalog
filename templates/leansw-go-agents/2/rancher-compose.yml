@@ -22,7 +22,7 @@
       type: "string"
 version: '2'
 services:
-  official-agent:
+  mvm-sonar-agent:
     scale: 1
     start_on_create: true
   go-agent-remote-docker:
