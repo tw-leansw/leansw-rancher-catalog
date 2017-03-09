@@ -1,7 +1,6 @@
 version: '2'
 volumes:
   agent-pipelines-local:
-    external: true
     driver: local
 services:
   mvm-sonar-agent:
