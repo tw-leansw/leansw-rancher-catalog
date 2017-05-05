@@ -23,7 +23,7 @@ services:
       io.rancher.container.pull_image: always
       io.rancher.sidekicks: gocd-volumes
   deliflow-artifactory-server:
-    image: jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss:4.13.0
+    image: reg.dev.twleansw.com/leansw/artifactory-oss:4.13.0
     stdin_open: true
     network_mode: bridge
     tty: true
@@ -124,7 +124,7 @@ services:
       io.rancher.sidekicks: sonar-volume
       io.ranhcer.container.hostname_override: container_name
   artifactory-data:
-    image: jfrog-docker-reg2.bintray.io/jfrog/artifactory-oss:4.13.0
+    image: reg.dev.twleansw.com/leansw/artifactory-oss:4.13.0
     volumes:
     - /var/opt/jfrog/artifactory
     tty: true
