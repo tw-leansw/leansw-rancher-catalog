@@ -1,7 +1,7 @@
 version: '2'
 services:
   deliflow-cas-service:
-    image: reg.dev.twleansw.com/leansw/cas-service:rc
+    image: reg.dev.twleansw.com/leansw/cas-service:${docker_image_tag}
     environment:
       LDAP_URL: ldap://${cas_domain_name}:389
       SERVER_NAME: https://${cas_domain_name}:8443
@@ -20,7 +20,7 @@ services:
     external_links:
     - ${gocdserver_ip}:deliflow-gocd-server
   deliflow-identity-service:
-    image: reg.dev.twleansw.com/leansw/identity-services:dev
+    image: reg.dev.twleansw.com/leansw/identity-services:${docker_image_tag}
     stdin_open: true
     entrypoint:
     - dockerize
@@ -41,7 +41,7 @@ services:
       io.ranhcer.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label_soft: host_env=dev
   deliflow-quartz-service:
-    image: reg.dev.twleansw.com/leansw/quartz-service:dev
+    image: reg.dev.twleansw.com/leansw/quartz-service:${docker_image_tag}
     stdin_open: true
     entrypoint:
     - dockerize
@@ -62,7 +62,7 @@ services:
       io.ranhcer.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label_soft: host_env=dev
   deliflow-code-metrics-service:
-    image: reg.dev.twleansw.com/leansw/code-metrics:dev
+    image: reg.dev.twleansw.com/leansw/code-metrics:${docker_image_tag}
     stdin_open: true
     entrypoint:
     - dockerize
@@ -85,7 +85,7 @@ services:
       io.ranhcer.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label_soft: host_env=dev
   deliflow-discovery-service:
-    image: reg.dev.twleansw.com/leansw/discovery-service:dev
+    image: reg.dev.twleansw.com/leansw/discovery-service:${docker_image_tag}
     stdin_open: true
     tty: true
     ports:
@@ -103,7 +103,7 @@ services:
     links:
     - deliflow-discovery-service:deliflow-discovery-service
   deliflow-cd-metrics-service:
-    image: reg.dev.twleansw.com/leansw/cd-metrics:dev
+    image: reg.dev.twleansw.com/leansw/cd-metrics:${docker_image_tag}
     environment:
       RANCHER_ACCESS_SECRET: 14E81ABF45359F074521
       RANCHER_SECRET_KEY: E7xmHz2h22iJWUpf1atDEnqsd2zzv9udHdsQkjjy
@@ -146,7 +146,7 @@ services:
     external_links:
     - ${zipkinserver_ip}:zipkin
   deliflow-webapp:
-    image: reg.dev.twleansw.com/leansw/deliflow-webapp:dev
+    image: reg.dev.twleansw.com/leansw/deliflow-webapp:${docker_image_tag}
     stdin_open: true
     entrypoint:
     - dockerize
