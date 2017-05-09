@@ -12,6 +12,13 @@
       default: "xxx.xxx.xxx.xxx"
       required: true
       type: "string"
+    - variable: "ldap_admin_password"
+      description: |
+        set ladp admin password.
+      label: "ldap_admin_password"
+      default: "Leanswdev1"
+      required: true
+      type: "password"
 version: '2'
 services:
   deliflow-mongo-server:

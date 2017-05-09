@@ -49,7 +49,7 @@ services:
   deliflow-openldap-server:
     image: reg.dev.twleansw.com/leansw/openldap:1.1.6-xfs
     environment:
-      LDAP_ADMIN_PASSWORD: Leanswdev1
+      LDAP_ADMIN_PASSWORD: ${ldap_admin_password}
       LDAP_DOMAIN: deliflow.com
       LDAP_ORGANISATION: Deliflow
     stdin_open: true
